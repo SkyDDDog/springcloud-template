@@ -1,0 +1,33 @@
+server:
+  port: 10003
+
+
+spring:
+  application:
+    name: module-praise-provider
+  output:
+    ansi:
+      enabled: always
+  #  cache:
+  #    type: caffeine
+  cloud:
+    nacos:
+      discovery:
+        watch:
+          enabled: true
+        server-addr: 127.0.0.1:8848
+        namespace: lear
+        group: LEAR_GROUP
+        username: nacos
+        password: nacos
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

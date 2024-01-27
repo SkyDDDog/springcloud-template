@@ -1,0 +1,42 @@
+server:
+  port: 10005
+
+
+spring:
+  application:
+    name: module-storage
+  output:
+    ansi:
+      enabled: always
+  #  cache:
+  #    type: caffeine
+  cloud:
+    nacos:
+      discovery:
+        watch:
+          enabled: true
+        server-addr: 127.0.0.1:8848
+        namespace: lear
+        group: LEAR_GROUP
+        username: nacos
+        password: nacos
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+    #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+seata:
+  application-id: ${spring.application.name}
+  tx-service-group: ${spring.application.name}-group
+  service:
+    vgroup-mapping:
+      module-storage-group: default
+    grouplist:
+      default: 127.0.0.1:8091

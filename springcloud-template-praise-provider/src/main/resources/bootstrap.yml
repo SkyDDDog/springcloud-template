@@ -1,0 +1,33 @@
+spring:
+  cloud:
+    nacos:
+      # 配置中心
+      config:
+        server-addr: 127.0.0.1:8848
+        enabled: true
+        file-extension: yaml
+        group: LEAR_GROUP
+        namespace: lear
+        username: nacos
+        password: nacos
+        shared-configs[0]:
+          data-id: mysql-druid.yaml
+          group: LEAR_GROUP
+          refresh: true
+        shared-configs[1]:
+          data-id: redis.yaml
+          group: LEAR_GROUP
+          refresh: true
+        shared-configs[2]:
+          data-id: auth-jwt.yaml
+          group: LEAR_GROUP
+          refresh: true
+        shared-configs[3]:
+          data-id: springdoc.yaml
+          group: LEAR_GROUP
+          refresh: true
+        shared-configs[4]:
+          data-id: mq-provider.yaml
+          group: LEAR_GROUP
+          refresh: true
+

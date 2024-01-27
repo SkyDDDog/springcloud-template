@@ -1,0 +1,86 @@
+#
+# Copyright 2013-2023 the original author or authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+version: "3"
+services:
+  gateway-service:
+    image: template-gateway
+    hostname: gateway-service
+    build:
+      dockerfile: ./springcloud-template-gateway/Dockerfile
+      context: ../
+    env_file:
+        - .env
+    container_name: template-gateway
+    ports:
+      - ${GATEWAY_PORT}:${GATEWAY_PORT}
+
+  account-service:
+    image: template-account
+    build:
+      dockerfile: ./springcloud-template--account/Dockerfile
+      context: ../
+    env_file:
+        - .env
+    container_name: template-account
+    ports:
+      - ${ACCOUNT_PORT}:${ACCOUNT_PORT}
+
+  order-service:
+    image: template-order
+    build:
+      dockerfile: ./springcloud-template--order/Dockerfile
+      context: ../
+    env_file:
+        - .env
+    container_name: template-order
+    ports:
+      - ${ORDER_PORT}:${ORDER_PORT}
+
+  storage-service:
+    image: template-storage
+    build:
+      dockerfile: ./springcloud-template--storage/Dockerfile
+      context: ../
+    env_file:
+        - .env
+    container_name: template-storage
+    ports:
+      - ${STORAGE_PORT}:${STORAGE_PORT}
+
+  praise-provider-service:
+    image: template-praise-provider
+    build:
+      dockerfile: ./springcloud-template--praise-provider/Dockerfile
+      context: ../
+    env_file:
+        - .env
+    container_name: template-praise-provider
+    ports:
+      - ${PRAISE_PROVIDER_PORT}:${PRAISE_PROVIDER_PORT}
+
+  praise-consumer-service:
+    image: template-praise-consumer
+    build:
+      dockerfile: ./springcloud-template--praise-consumer/Dockerfile
+      context: ../
+    env_file:
+        - .env
+    container_name: template-praise-consumer
+    ports:
+      - ${PRAISE_CONSUMER_PORT}:${PRAISE_CONSUMER_PORT}
+    depends_on:
+      - template-praise-provider
